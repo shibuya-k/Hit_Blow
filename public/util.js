@@ -5,5 +5,5 @@
  * @return {object}
  */
 function $(selector){
-    return( document.querySelector(selector) );
-  }
+  return( document.querySelector(selector) );
+}

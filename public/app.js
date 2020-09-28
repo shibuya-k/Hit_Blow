@@ -15,7 +15,9 @@ const socket = io();
 
 var min=0;
 var max=9;
-var first = Math.floor( Math.random() * (max + 1 - min) ) + min ;
+var first =0 ;
+var second=0;
+var third=0;
 
 //-------------------------------------
 // STEP1. Socket.ioサーバへ接続
@@ -33,6 +35,7 @@ socket.on("token", (data)=>{
     $("#inputmyname").style.display = "block";    // 名前入力を表示
     $("#txt-myname").focus();
   }
+number_set();
 });
 
 //-------------------------------------
@@ -119,7 +122,7 @@ $("#frm-post").addEventListener("submit", (e)=>{
   if(first==msg.value){
     addMessageFromMaster(`正解!`);
   }
-  addMessageFromMaster(`${first}`);
+  addMessageFromMaster(`${first},${second},${third}`);
   // 発言フォームを空にする
   msg.value = "";
 });
@@ -186,6 +189,26 @@ socket.on("member-post", (msg)=>{
   }
 });
 
+
+// /**
+//  * [イベント] 誰かが入室した
+//  */
+// socket.on("number_", (data)=>{
+// first = Math.floor( Math.random() * (max + 1 - min) ) + min ;
+// second=Math.floor( Math.random() * (max + 1 - min) ) + min ;
+//   while(first==second){
+//     second=Math.floor( Math.random() * (max + 1 - min) ) + min ;
+//   }
+// });
+function number_set(){
+  first = Math.floor( Math.random() * (max + 1 - min) ) + min ;
+  while(first==second){
+    second=Math.floor( Math.random() * (max + 1 - min) ) + min ;
+  }
+  while(first==third||second==third){
+    third=Math.floor( Math.random() * (max + 1 - min) ) + min ;
+  }
+}
 
 /**
  * 最初の状態にもどす
